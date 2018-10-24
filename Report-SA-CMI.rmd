@@ -1,11 +1,9 @@
 ---
 title: Report on Sensitivity analysis of CMI algorithm
 author: Mariona Roig\'{e}
-output:
-  pdf_document:
-    theme: united
-    number_sections: TRUE
-    toc: TRUE
+output: 
+  word_document:
+    toc: TRUE 
 bibliography: library.bib
 ---
 
@@ -44,13 +42,13 @@ More AWAY points allows the algorithm to compare the climate data of each HOME p
 
 The results of _Mentha aquatica_ case study show how the number of AWAY points and the CMI have a positive relationship (Figure 1).
 
-(1) Scatterplot of number of away points and mean CMI
+1. Scatterplot of number of away points and mean CMI
 
 ![Relationship between number of away points and mean CMI](nz_proj_summarised/lm_meancMI_samplesize.png)
 
 At the same time the variability of CMI values (measured by their sd) seems to decrease with higher sample sizes (number of AWAY points used in calculating the HOME projection) (Figure 2).
 
-(2) Scatterplot of number of away points and variability of CMIs
+2. Scatterplot of number of away points and variability of CMIs
 
 ![Decrease of CMI variability with higher sample sizes](nz_proj_summarised/lm_sdCMI_samplesize.png)
 
@@ -64,7 +62,7 @@ An interesting question is whether there a minimum amount of AWAY points that en
 
  Figure 3 shows that the greater number of AWAY points used, more AWAY points the projection contains. Consequently, projections built using few AWAY points will be very sensitive to the quality of their most Influential AWAY points.
 
-(3) Relationship between the number of best matched points points and sample size
+3. Relationship between the number of best matched points points and sample size
 
  ![Scatterplot](nz_proj_summarised/influential_AWAY_points_scatterplot.png)
 
@@ -76,18 +74,18 @@ Because CMI ranges between 0 and 1, the 0.7 CMI threshold is generally interpret
 
 Each facet plot below shows the number of New Zealand locations that obtained each CMI value for a given sample size. The red vertical line shows where the 0.7 CMI value lies and how many locations are over it.
 
-(4) Facet plots for 11 sample sizes from 100 to 100,000
+4. Facet plots for 11 sample sizes from 100 to 100,000
 
 ![Facet plot of different sample sizes](nz_proj_summarised/04_out_cmis_fac_by_all_subsample_2018-10-22.png)
 
-(5) 'Zoom' to sample sizes from 100 to 2500
+5. 'Zoom' to sample sizes from 100 to 2500
 
 ![Facet plot](nz_proj_summarised/04_out_cmis_fac_by_zoom_subsample_2018-10-22.png)
 
-(6) More detailed 'Zoom' to sample sizes from 100-2500
+6.  More detailed 'Zoom' to sample sizes from 100-2500
 ![Facet plot zoom](nz_proj_summarised/04_out_cmis_fac_by_finer_subsample_2018-10-21.png)
 
-(7) Boxplot ???? Mariona: I don't think I understand this box plot, or how it relates to the facet plots.
+7. Boxplot ???? Mariona: I don't think I understand this box plot, or how it relates to the facet plots.
 
 ![Box plot of the proportions of CMIs over 0.7](Boxplot_all.png)
 
