@@ -58,9 +58,11 @@ chk <- filter(proj_comp, cmiRnd < 0 | cmiRnd > 1)
 # Extract Influential AWAY points
 points <- proj_comp[,c(5,10)]
 iap_per_samplesize <-as.data.frame(colSums(table(points) != 0))
-iap_per_samplesize$sample_size <- row.names(iap_per_samplesize)
+iap_per_samplesize$sample_size <- as.numeric(row.names(iap_per_samplesize))
 colnames(iap_per_samplesize)[1] <- 'n'
-head(iap_per_samplesize)
+
+str(iap_per_samplesize)
+
 
 # Extract basic stats
 cmi_min_max_mean_sd_by_subsample <-
@@ -123,10 +125,12 @@ png(filename = paste(summ_out_dir, 'lm_sdCMI_samplesize.png', sep = '/'),
 		lm_sdCMI_samplesize
 	dev.off()
 
+head(iap_per_samplesize)
+
 influential_AWAY_points_scatterplot <-
   ggplot(iap_per_samplesize, aes(x = sample_size,y = n)) +
  	geom_point(color = 'darkturquoise') +
-	labs( title = 'Influential AWAY points', y = 'Number of AWAY points used to build projection', x = 'Sample size')
+	labs( title = 'Influential AWAY points', y = 'Number of influential AWAY locations', x = 'Sample size')
 
 	png(filename = paste(summ_out_dir, 'influential_AWAY_points_scatterplot.png', sep = '/'),
 					width = 1500,
@@ -236,7 +240,7 @@ box_plot_all <-
 		xlab("subsample size") +
 		theme(axis.text.y = element_text(size = txt_sz),
 					axis.title.y = element_text(size = txt_sz),
-					axis.text.x = element_text(size = txt_sz),
+					axis.text.x = element_text(angle = 45, size = txt_sz),
 					axis.title.x = element_text(size = txt_sz))
 box_plot_all
 
@@ -259,17 +263,6 @@ box_plot_all <-
 					axis.text.x = element_text(size = txt_sz),
 					axis.title.x = element_text(size = txt_sz))
 box_plot_all
-
-head
-
-m1 <- lm(count_and_proportion_per_cmi_by_subsample$cmiRnd ~ count_and_proportion_per_cmi_by_subsample$subsample_sz)
-m1
-
-summary(m1)
-plot(m1)
-
-
-
 
 
 
@@ -294,11 +287,11 @@ box_plot_zoom
 # Write box plot plot to file
 #--------------------------------------------------------------
 
-png(filename = paste(summ_out_dir, boxplot_out_fn, sep = '/'),
+png(filename = 'Boxplot_all.png',
 			 width = 600,
 			height = 800,
 				 res = 100)
-	box_plot
+	box_plot_all
 dev.off()
 
 #pdf(box_plot, file = 'nz_proj_summary_figures/03_out_box_whisker_plot_of_oseas_cmis_by_sp.pdf')

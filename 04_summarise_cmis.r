@@ -42,9 +42,6 @@ head(proj_comp)
 
 summary(proj_comp)
 
-
-
-
 #--------------------------------------------------------------
 # Summarise results for NZ CMI maps from each subsample size
 #--------------------------------------------------------------

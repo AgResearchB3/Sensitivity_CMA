@@ -11,8 +11,6 @@ bibliography: library.bib
 
 [TITLE]
 
-# Petita prova
-
 # The Match Climates algorithm for pest risk analysis (PRA)
 
 The climatic similarity between two locations can be used to inform a key question in pest risk analysis (PRA). PRA aims to assess the risk that a specific species poses to an area of interest (PRA area). One way to infer whether the species of interest could become established in the PRA area is by comparing the climate of abroad locations where the species is present to the climate of the region of interest.
@@ -39,50 +37,67 @@ Here we perform a sensitivity analysis of the match climates algorithm to the nu
 
 To do so, we chose the species _Mentha aquatica_ because of its large number of overseas presence points (189,835). Then we built 1000 HOME projections, starting with a sample size of 100 AWAY points and increasing it by 100 each iteration until reached a sample size of 100,000. The analysis took over three weeks time to run.
 
-![Flow chart of this study](CMI-projections-NZ.png)
+![Flow chart of _Mentha aquatica_ case study](CMI-projections-NZ.png)
 
 ### Number of AWAY points
+More AWAY points allows the algorithm to compare the climate data of each HOME point to more potential AWAY matches thus increasing the likelihood of obtaining a better match (higher CMI).Therefore, we expect that a larger number of AWAY points will increase the average CMI obtained in the HOME projection.
 
-Hypotheses: More AWAY points mean more one to one comparisons HOME vs AWAY are gonna be carried, increasing the chance of finding a higher CMI value as a best match for each HOME location.
+The results of _Mentha aquatica_ case study show how the number of AWAY points and the CMI have a positive relationship (Figure 1).
 
-1. Do more away points increase average CMI in the HOME projection?
+1. Scatterplot of number of away points and mean CMI
 
-![Regression line](nz_proj_summarised/lm_meancMI_samplesize.png)
+![Relationship between number of away points and mean CMI](nz_proj_summarised/lm_meancMI_samplesize.png)
 
-2. Do more AWAY points decrease the variability of the CMI values obtained in the HOME projection?
+At the same time the variability of CMI values (measured by their sd) seems to decrease with higher sample sizes (number of AWAY points used in calculating the HOME projection) (Figure 2).
 
-![Regression line](nz_proj_summarised/lm_sdCMI_samplesize.png)
+2.Scatterplot of number of away points and variability of CMIs
 
-3. Is there a minimum amount of AWAY points that ensures a stable projection?
+![Decrease of CMI variability with higher sample sizes](nz_proj_summarised/lm_sdCMI_samplesize.png)
 
-### Number of HOME locations that obtained each CMI values
-#### The CMI = 0.7 threshold value
+An interesting question is whether there a minimum amount of AWAY points that ensures a stable projection. Figure 1 seems to show a plateau after 50,000 AWAY points. This result suggests that a very large number of AWAY points are required to build 'good projections'.
+
+ A consequencie of using over 50,000 AWAY presence points is that it increases the likelihood of including the Influential AWAY points in the sample. Influential AWAY points are those that become the best match for a big number of HOME locations.
+
+ ## The importance of the **influential** AWAY points
+
+ The influential AWAY points are those overseas points that have matched the most with HOME locations when constructing the projection.
+
+ Figure 3 shows that the greater number of AWAY points used, more AWAY points the projection contains. Consequently, projections built using few AWAY points will be very sensitive to the quality of their most Influential AWAY points.
+
+3.Relationship between the number of best matched points points and sample size
+
+ ![Scatterplot](nz_proj_summarised/influential_AWAY_points_scatterplot.png)
+
+
+## Number of HOME locations that obtained each CMI values
+### The CMI = 0.7 threshold value
 
 Because CMI ranges between 0 and 1, the 0.7 CMI threshold is generally interpreted as indicating two climates are sufficiently similar for a species to persist in both. However that threshold is rather arbitrary and potentially species specific.
 
-![Facet plot](nz_proj_summarised/04_out_cmis_fac_by_all_subsample_2018-10-22.png)
+Each facet plot below shows the number of New Zealand locations that obtained each CMI value for a given sample size. The red vertical line shows where the 0.7 CMI value lies and how many locations are over it.
 
+4. Facet plots for 11 sample sizes from 100 to 100,000
+![Facet plot of different sample sizes](nz_proj_summarised/04_out_cmis_fac_by_all_subsample_2018-10-22.png)
+
+5. 'Zoom' to sample sizes from 100 to 2500
 ![Facet plot](nz_proj_summarised/04_out_cmis_fac_by_zoom_subsample_2018-10-22.png)
 
+6. More detailed 'Zoom' to sample sizes from 100-2500
 ![Facet plot zoom](nz_proj_summarised/04_out_cmis_fac_by_finer_subsample_2018-10-21.png)
 
+7. Boxplot of the proportions of
 
-## The importance of the **influential** AWAY points
-
-The influential AWAY points are those overseas points that have matched the most with HOME locations when constructing the projection.
-
-![Scatterplot](nz_proj_summarised/influential_AWAY_points_scatterplot.png)
+![Box plot of the proportions of CMIs over 0.7](Boxplot_all.png)
 
 
-### Proportion of HOME to AWAY locations
+#### Proportion of HOME to AWAY locations
 
-[Extracted from @Phillips2018] The number of HOME locations with climates favourable for establishment will generally increase with the proportion of CMIs over 0.7. However, the total number of overseas climate cells from which the proportion for each species was calculated must also be considered when interpreting such data (Fig. 3). For example, Nylanderia vaga (Forel), Strumigenys xenos Brown, Pheidole rugulosa Forel and P. proxima Mayr had CMIs from only three or fewer non-New Zealand locations (Fig. 3). This suggests their distributions were under-represented by the data and, had CMIs for more locations been available, some would likely have been less than 0.7, particularly for tropical or subtropical species such as N. vaga. Thus, the
-proportions of CMIs C 0.7 could be too high for these species (Fig. 3).
+_[Extracted from @Phillips2018] The number of HOME locations with climates favourable for establishment will generally increase with the proportion of CMIs over 0.7. However, the total number of overseas climate cells from which the proportion for each species was calculated must also be considered when interpreting such data. For example, Nylanderia vaga (Forel), Strumigenys xenos Brown, Pheidole rugulosa Forel and P. proxima Mayr had CMIs from only three or fewer non-New Zealand locations. This suggests their distributions were under-represented by the data and, had CMIs for more locations been available, some would likely have been less than 0.7, particularly for tropical or subtropical species such as N. vaga. Thus, the
+proportions of CMIs C 0.7 could be too high for these species._
 
 
+### Species specificity of the 0.7 threshold
 
-### Species specificity
-Imagine a species  with all its occurrence points very similar to each other. You could assume that species has a very narrow climate range, therefore maybe a 0.7 threshold value is too low and we would be overconsidering the threat it poses to the HOME location. On the contrary, imagine a species that has a very broad climatic range (which could be indicative of niche expansion) and its best match with HOME location is 0.6. Wouldn't it be wise to consider the species for further PRA since it has potential to keep expanding its climatic niche?
-One solution could be to correct the CMI threshold by some variability measure of the species climatic niche?
+A potential way to evaluate whether the 0.7 threshold is suitable for the species of concern is to calculate the climatic variability of the species known abroad range. 
 
-This will also be related to the number of AWAY points used to calculate the projection (more points, more probability of a wider climatic range).
+A species with all its occurrence points climatically similar to each other will probably have a narrow climate niche. In that case, a 0.7 threshold value might be too low.On the other hand, a species with a very broad climatic range could indicate the species is ongoing a process of niche expansion, for which then a 0.7 threshold could be too high. This will also be related to the number of AWAY points used to calculate the projection (more points, more probability of a wider climatic range).
